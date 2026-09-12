@@ -4091,3 +4091,32 @@ p {
         transform: scale(1.05) !important;
     }
 }
+.more-stays-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #2f6f4e;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.more-stays-btn span {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.more-stays-btn:hover {
+    transform: translateY(-3px);
+    background: #24583e;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.more-stays-btn:hover span {
+    transform: translateX(5px);
+}
