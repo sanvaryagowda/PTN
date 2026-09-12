@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coming Soon | Plan Your Trip In Nature</title>
+
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            min-height: 100svh;
+            min-height: 100dvh;
+            overflow: hidden;
+            color: #fff;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(3, 25, 16, 0.94),
+                    rgba(13, 58, 39, 0.90),
+                    rgba(2, 31, 24, 0.96)
+                );
+            position: relative;
+        }
+
+        /* Background */
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -2;
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(216, 176, 73, 0.16),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    145deg,
+                    #071d13,
+                    #0b3927 45%,
+                    #031b14
+                );
+        }
+
+        .mountain {
+            position: absolute;
+            bottom: -5%;
+            width: 0;
+            height: 0;
+            border-left: 30vw solid transparent;
+            border-right: 30vw solid transparent;
+            border-bottom: 48vh solid rgba(0, 0, 0, 0.18);
+        }
+
+        .mountain.one {
+            left: -20vw;
+        }
+
+        .mountain.two {
+            right: -20vw;
+            transform: scale(1.2);
+            opacity: .7;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(225, 198, 105, .55);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            left: 12%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 80%;
+            top: 15%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            left: 25%;
+            top: 70%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            left: 72%;
+            top: 65%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            left: 50%;
+            top: 12%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: .25;
+            }
+
+            50% {
+                transform: translateY(-35px) scale(1.4);
+                opacity: .8;
+            }
+        }
+
+        /* Main */
+        .page {
+            min-height: 100svh;
+            min-height: 100dvh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(20px, 4vw, 60px);
+            text-align: center;
+        }
+
+        .content {
+            width: min(900px, 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: entrance 1.2s ease forwards;
+        }
+
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo */
+        .logo {
+            width: clamp(150px, 22vw, 300px);
+            max-width: 70vw;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: clamp(10px, 2vw, 22px);
+            filter:
+                drop-shadow(0 15px 35px rgba(0, 0, 0, .35));
+            animation: logoFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .eyebrow {
+            font-family: Arial, sans-serif;
+            font-size: clamp(11px, 1.2vw, 15px);
+            letter-spacing: clamp(3px, .6vw, 7px);
+            text-transform: uppercase;
+            color: #d9bd63;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 82px);
+            line-height: .95;
+            letter-spacing: clamp(1px, .3vw, 4px);
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 8px 25px rgba(0, 0, 0, .35);
+            margin-bottom: clamp(16px, 2vw, 25px);
+        }
+
+        .line {
+            width: clamp(80px, 15vw, 170px);
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #d9bd63,
+                transparent
+            );
+            margin-bottom: clamp(18px, 3vw, 28px);
+        }
+
+        .message {
+            font-family: Arial, sans-serif;
+            font-size: clamp(15px, 1.7vw, 21px);
+            line-height: 1.7;
+            color: rgba(255,255,255,.82);
+            max-width: 680px;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: clamp(15px, 1.6vw, 20px);
+            font-style: italic;
+            color: #d9bd63;
+            margin-bottom: clamp(25px, 4vw, 40px);
+        }
+
+        /* Button */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 0 30px;
+            border: 1px solid rgba(217,189,99,.7);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: .3s ease;
+            background: rgba(255,255,255,.06);
+            backdrop-filter: blur(10px);
+        }
+
+        .button:hover {
+            background: #d9bd63;
+            color: #082217;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.25);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: clamp(15px, 2.5vw, 30px);
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,.45);
+            padding: 0 20px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .page {
+                padding:
+                    max(15px, env(safe-area-inset-top))
+                    20px
+                    max(55px, env(safe-area-inset-bottom));
+            }
+
+            .logo {
+                width: clamp(145px, 48vw, 220px);
+            }
+
+            h1 {
+                font-size: clamp(35px, 12vw, 58px);
+            }
+
+            .message {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .tagline {
+                font-size: 15px;
+            }
+
+            .button {
+                width: min(260px, 90%);
+            }
+        }
+
+        /* Very short phones */
+        @media (max-height: 650px) {
+
+            .logo {
+                width: 125px;
+                margin-bottom: 5px;
+            }
+
+            .eyebrow {
+                margin-bottom: 8px;
+            }
+
+            h1 {
+                font-size: 38px;
+                margin-bottom: 12px;
+            }
+
+            .line {
+                margin-bottom: 12px;
+            }
+
+            .message {
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .tagline {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="mountain one"></div>
+        <div class="mountain two"></div>
+
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+    </div>
+
+    <main class="page">
+
+        <div class="content">
+
+            <img
+                src="images/logo.png"
+                alt="Plan Your Trip In Nature"
+                class="logo"
+            >
+
+            <div class="eyebrow">
+                Something Beautiful Is Coming
+            </div>
+
+            <h1>Coming Soon</h1>
+
+            <div class="line"></div>
+
+            <p class="message">
+                We're creating a beautiful new way to discover
+                unforgettable stays, peaceful destinations and
+                extraordinary experiences in nature.
+            </p>
+
+            <p class="tagline">
+                Where Every Stay Becomes a Story.
+            </p>
+
+            <a href="mailto:your-email@example.com" class="button">
+                Stay Connected
+            </a>
+
+        </div>
+
+    </main>
+
+    <div class="footer">
+        © <span id="year"></span> Plan Your Trip In Nature
+    </div>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
