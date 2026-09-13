@@ -4096,6 +4096,11 @@ p {
     text-align: center;
     padding: 20px 15px;
 }
+/* Footer Copyright */
+.copyright {
+    text-align: center;
+    padding: 20px 15px;
+}
 
 /* Team Page Link */
 .copyright > a {
