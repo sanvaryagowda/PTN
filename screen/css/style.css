@@ -4091,3 +4091,37 @@ p {
         transform: scale(1.05) !important;
     }
 }
+/* Footer Copyright */
+.copyright {
+    text-align: center;
+    padding: 20px 15px;
+}
+
+/* Team Page Link */
+.copyright > a {
+    display: inline-block;
+    font-family: "Playfair Display", serif;
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    transition: color 0.3s ease,
+                transform 0.3s ease;
+}
+
+.copyright > a:hover {
+    color: #2fbf71;
+    transform: translateY(-2px);
+}
+
+/* Copyright Text */
+.copyright p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: inherit;
+}
