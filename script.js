@@ -1030,3 +1030,218 @@ window.addEventListener("load", () => {
     }, 2000);
 
 });
+/* =========================================================
+   LAUNCH DAY CELEBRATION
+   Top Shower + Golden Sparkles + Nature Leaves
+   Every 2 Seconds
+   Responsive
+   No Rotation
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    const launchContainer = document.getElementById("launch-effects");
+
+    if (!launchContainer) {
+        console.warn("Launch effects container not found.");
+        return;
+    }
+
+    /* ---------------------------------------------
+       RESPONSIVE PARTICLE COUNTS
+       --------------------------------------------- */
+
+    function getParticleCounts() {
+
+        const width = window.innerWidth;
+
+        if (width <= 600) {
+            return {
+                confetti: 22,
+                sparkle: 10,
+                leaves: 5
+            };
+        }
+
+        if (width <= 1024) {
+            return {
+                confetti: 38,
+                sparkle: 16,
+                leaves: 8
+            };
+        }
+
+        return {
+            confetti: 55,
+            sparkle: 22,
+            leaves: 10
+        };
+    }
+
+    /* ---------------------------------------------
+       RANDOM NUMBER
+       --------------------------------------------- */
+
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    /* ---------------------------------------------
+       TOP CONFETTI SHOWER
+       --------------------------------------------- */
+
+    function createTopShower(count) {
+
+        const colors = [
+            "#2e7d32",
+            "#66bb6a",
+            "#ffd700",
+            "#f5f5f5",
+            "#d4af37",
+            "#81c784"
+        ];
+
+        for (let i = 0; i < count; i++) {
+
+            const particle = document.createElement("div");
+
+            particle.className =
+                "launch-particle launch-confetti";
+
+            particle.style.left = `${random(0, 100)}%`;
+
+            particle.style.backgroundColor =
+                colors[Math.floor(Math.random() * colors.length)];
+
+            particle.style.setProperty(
+                "--move-x",
+                `${random(-180, 180)}px`
+            );
+
+            particle.style.animationDuration =
+                `${random(2.5, 4.5)}s`;
+
+            particle.style.animationDelay =
+                `${random(0, 0.5)}s`;
+
+            launchContainer.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 5500);
+        }
+    }
+
+    /* ---------------------------------------------
+       GOLDEN SPARKLES
+       --------------------------------------------- */
+
+    function createGoldenSparkles(count) {
+
+        for (let i = 0; i < count; i++) {
+
+            const sparkle = document.createElement("div");
+
+            sparkle.className =
+                "launch-particle launch-sparkle";
+
+            sparkle.style.left = `${random(5, 95)}%`;
+            sparkle.style.top = `${random(8, 45)}%`;
+
+            sparkle.style.setProperty(
+                "--spark-x",
+                `${random(-180, 180)}px`
+            );
+
+            sparkle.style.setProperty(
+                "--spark-y",
+                `${random(60, 250)}px`
+            );
+
+            sparkle.style.animationDuration =
+                `${random(1.2, 2.2)}s`;
+
+            sparkle.style.animationDelay =
+                `${random(0, 0.5)}s`;
+
+            launchContainer.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+    }
+
+    /* ---------------------------------------------
+       NATURE LEAVES
+       --------------------------------------------- */
+
+    function createNatureLeaves(count) {
+
+        for (let i = 0; i < count; i++) {
+
+            const leaf = document.createElement("div");
+
+            leaf.className =
+                "launch-particle launch-leaf";
+
+            leaf.style.left = `${random(0, 100)}%`;
+
+            leaf.style.top = "-25px";
+
+            leaf.style.setProperty(
+                "--leaf-x",
+                `${random(-250, 250)}px`
+            );
+
+            leaf.style.animationDuration =
+                `${random(3.5, 5.5)}s`;
+
+            leaf.style.animationDelay =
+                `${random(0, 0.8)}s`;
+
+            launchContainer.appendChild(leaf);
+
+            setTimeout(() => {
+                leaf.remove();
+            }, 6500);
+        }
+    }
+
+    /* ---------------------------------------------
+       COMPLETE LAUNCH BURST
+       --------------------------------------------- */
+
+    function launchCelebration() {
+
+        const counts = getParticleCounts();
+
+        createTopShower(counts.confetti);
+        createGoldenSparkles(counts.sparkle);
+        createNatureLeaves(counts.leaves);
+    }
+
+    /* ---------------------------------------------
+       FIRST BURST
+       --------------------------------------------- */
+
+    window.addEventListener("load", function () {
+
+        setTimeout(() => {
+            launchCelebration();
+        }, 1000);
+
+    });
+
+    /* ---------------------------------------------
+       REPEAT EVERY 2 SECONDS
+       --------------------------------------------- */
+
+    setInterval(() => {
+
+        launchCelebration();
+
+    }, 2000);
+
+})();
