@@ -802,3 +802,126 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+// ==========================================
+// CONFETTI BURST SYSTEM
+// ==========================================
+
+function createConfettiBurst() {
+
+    const container = document.getElementById("confetti-container");
+
+    if (!container) {
+        console.log("Confetti container not found");
+        return;
+    }
+
+
+    // Confetti colors
+    const colors = [
+        "#ff4d6d",
+        "#ffd166",
+        "#06d6a0",
+        "#118ab2",
+        "#8338ec",
+        "#ffffff",
+        "#ff9f1c",
+        "#2ec4b6"
+    ];
+
+
+    // Number of confetti pieces
+    for (let i = 0; i < 120; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.classList.add("confetti");
+
+
+        // Random color
+        confetti.style.backgroundColor =
+            colors[
+                Math.floor(Math.random() * colors.length)
+            ];
+
+
+        // Starting position
+        confetti.style.left = "50%";
+        confetti.style.top = "35%";
+
+
+        // Random direction
+        const angle =
+            Math.random() * Math.PI * 2;
+
+
+        // Random distance
+        const distance =
+            200 + Math.random() * 600;
+
+
+        // X movement
+        confetti.style.setProperty(
+            "--x",
+            `${Math.cos(angle) * distance}px`
+        );
+
+
+        // Y movement
+        confetti.style.setProperty(
+            "--y",
+            `${Math.sin(angle) * distance}px`
+        );
+
+
+        // Random size
+        const size =
+            6 + Math.random() * 7;
+
+        confetti.style.width =
+            `${size}px`;
+
+        confetti.style.height =
+            `${size * 1.5}px`;
+
+
+        // Add to container
+        container.appendChild(confetti);
+
+
+        // Remove after animation
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 3000);
+
+    }
+
+}
+
+
+// ==========================================
+// START CONFETTI SYSTEM
+// ==========================================
+
+window.addEventListener("load", () => {
+
+    console.log("🎉 Confetti system loaded");
+
+
+    // First burst after 1 second
+    setTimeout(() => {
+
+        createConfettiBurst();
+
+    }, 1000);
+
+
+    // Burst every 10 seconds
+    setInterval(() => {
+
+        createConfettiBurst();
+
+    }, 10000);
+
+});
