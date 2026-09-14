@@ -4185,27 +4185,25 @@ p {
 
 
 /* ==========================================
-   CONFETTI PIECES
+   CONFETTI
 ========================================== */
 
 .confetti {
     position: absolute;
-    width: 9px;
-    height: 15px;
+    width: 8px;
+    height: 14px;
     border-radius: 2px;
-    opacity: 1;
 
-    animation:
-        confetti-burst 3s ease-out forwards,
-        confetti-spin 3s linear forwards;
+    animation: confetti-fly 3s ease-out forwards;
 }
 
 
 /* ==========================================
-   CONFETTI BURST
+   CONFETTI MOVEMENT
+   NO ROTATION
 ========================================== */
 
-@keyframes confetti-burst {
+@keyframes confetti-fly {
 
     0% {
         transform: translate(0, 0);
@@ -4215,23 +4213,6 @@ p {
     100% {
         transform: translate(var(--x), var(--y));
         opacity: 0;
-    }
-
-}
-
-
-/* ==========================================
-   CONFETTI ROTATION
-========================================== */
-
-@keyframes confetti-spin {
-
-    0% {
-        rotate: 0deg;
-    }
-
-    100% {
-        rotate: 720deg;
     }
 
 }
