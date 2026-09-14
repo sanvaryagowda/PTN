@@ -803,12 +803,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 // ==========================================
-// CONFETTI BURST SYSTEM
+// 4-EDGE CONFETTI BURST
 // ==========================================
 
 function createConfettiBurst() {
 
-    const container = document.getElementById("confetti-container");
+    const container =
+        document.getElementById("confetti-container");
 
     if (!container) {
         console.log("Confetti container not found");
@@ -816,7 +817,6 @@ function createConfettiBurst() {
     }
 
 
-    // Confetti colors
     const colors = [
         "#ff4d6d",
         "#ffd166",
@@ -829,10 +829,34 @@ function createConfettiBurst() {
     ];
 
 
-    // Number of confetti pieces
-    for (let i = 0; i < 120; i++) {
+    // Detect screen size
+    const width = window.innerWidth;
 
-        const confetti = document.createElement("div");
+
+    // Keep mobile lighter
+    let totalPieces = 80;
+
+    if (width <= 600) {
+        totalPieces = 40;
+    }
+
+    else if (width <= 1024) {
+        totalPieces = 60;
+    }
+
+    else {
+        totalPieces = 80;
+    }
+
+
+    // ==========================================
+    // CREATE CONFETTI
+    // ==========================================
+
+    for (let i = 0; i < totalPieces; i++) {
+
+        const confetti =
+            document.createElement("div");
 
         confetti.classList.add("confetti");
 
@@ -840,51 +864,132 @@ function createConfettiBurst() {
         // Random color
         confetti.style.backgroundColor =
             colors[
-                Math.floor(Math.random() * colors.length)
+                Math.floor(
+                    Math.random() * colors.length
+                )
             ];
 
 
-        // Starting position
-        confetti.style.left = "50%";
-        confetti.style.top = "35%";
+        // ==========================================
+        // RANDOM EDGE
+        // ==========================================
+
+        const edge =
+            Math.floor(Math.random() * 4);
 
 
-        // Random direction
-        const angle =
-            Math.random() * Math.PI * 2;
+        let startX;
+        let startY;
+        let angle;
 
 
-        // Random distance
+        /*
+         * 0 = TOP
+         * 1 = RIGHT
+         * 2 = BOTTOM
+         * 3 = LEFT
+         */
+
+
+        // TOP
+        if (edge === 0) {
+
+            startX =
+                Math.random() * 100;
+
+            startY = -2;
+
+            angle =
+                Math.PI / 2 +
+                (Math.random() - 0.5) * 1.2;
+
+        }
+
+
+        // RIGHT
+        else if (edge === 1) {
+
+            startX = 102;
+
+            startY =
+                Math.random() * 100;
+
+            angle =
+                Math.PI +
+                (Math.random() - 0.5) * 1.2;
+
+        }
+
+
+        // BOTTOM
+        else if (edge === 2) {
+
+            startX =
+                Math.random() * 100;
+
+            startY = 102;
+
+            angle =
+                -Math.PI / 2 +
+                (Math.random() - 0.5) * 1.2;
+
+        }
+
+
+        // LEFT
+        else {
+
+            startX = -2;
+
+            startY =
+                Math.random() * 100;
+
+            angle =
+                (Math.random() - 0.5) * 1.2;
+
+        }
+
+
+        // Set starting position
+        confetti.style.left =
+            `${startX}%`;
+
+        confetti.style.top =
+            `${startY}%`;
+
+
+        // ==========================================
+        // BURST DISTANCE
+        // ==========================================
+
         const distance =
-            200 + Math.random() * 600;
+            180 +
+            Math.random() * 350;
 
 
-        // X movement
+        const x =
+            Math.cos(angle) * distance;
+
+        const y =
+            Math.sin(angle) * distance;
+
+
         confetti.style.setProperty(
             "--x",
-            `${Math.cos(angle) * distance}px`
+            `${x}px`
         );
 
-
-        // Y movement
         confetti.style.setProperty(
             "--y",
-            `${Math.sin(angle) * distance}px`
+            `${y}px`
         );
 
 
-        // Random size
-        const size =
-            6 + Math.random() * 7;
-
-        confetti.style.width =
-            `${size}px`;
-
-        confetti.style.height =
-            `${size * 1.5}px`;
+        // Slightly different animation speed
+        confetti.style.animationDuration =
+            `${1.6 + Math.random() * 1.2}s`;
 
 
-        // Add to container
         container.appendChild(confetti);
 
 
@@ -893,7 +998,7 @@ function createConfettiBurst() {
 
             confetti.remove();
 
-        }, 3000);
+        }, 3200);
 
     }
 
@@ -901,12 +1006,12 @@ function createConfettiBurst() {
 
 
 // ==========================================
-// START CONFETTI SYSTEM
+// BURST EVERY 2 SECONDS
 // ==========================================
 
 window.addEventListener("load", () => {
 
-    console.log("🎉 Confetti system loaded");
+    console.log("🎉 4-edge confetti loaded");
 
 
     // First burst after 1 second
@@ -917,11 +1022,11 @@ window.addEventListener("load", () => {
     }, 1000);
 
 
-    // Burst every 10 seconds
+    // Every 2 seconds
     setInterval(() => {
 
         createConfettiBurst();
 
-    }, 10000);
+    }, 2000);
 
 });
