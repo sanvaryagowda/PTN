@@ -4169,50 +4169,166 @@ p {
 .more-stays-btn:hover span {
     transform: translateX(5px);
 }
-/* ==========================================
-   CONFETTI CONTAINER
-========================================== */
+// ==========================================
+// CONFETTI BURST SYSTEM
+// ==========================================
 
-#confetti-container {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 999999;
-}
+function createConfettiBurst() {
 
+    const container =
+        document.getElementById("confetti-container");
 
-/* ==========================================
-   CONFETTI
-========================================== */
-
-.confetti {
-    position: absolute;
-    width: 8px;
-    height: 14px;
-    border-radius: 2px;
-
-    animation: confetti-fly 3s ease-out forwards;
-}
-
-
-/* ==========================================
-   CONFETTI MOVEMENT
-   NO ROTATION
-========================================== */
-
-@keyframes confetti-fly {
-
-    0% {
-        transform: translate(0, 0);
-        opacity: 1;
+    if (!container) {
+        console.log("Confetti container not found");
+        return;
     }
 
-    100% {
-        transform: translate(var(--x), var(--y));
-        opacity: 0;
+
+    const colors = [
+        "#ff4d6d",
+        "#ffd166",
+        "#06d6a0",
+        "#118ab2",
+        "#8338ec",
+        "#ffffff",
+        "#ff9f1c",
+        "#2ec4b6"
+    ];
+
+
+    // ==========================================
+    // CREATE CONFETTI FROM BOTH SIDES
+    // ==========================================
+
+    for (let i = 0; i < 120; i++) {
+
+        const confetti =
+            document.createElement("div");
+
+        confetti.classList.add("confetti");
+
+
+        // Random color
+        confetti.style.backgroundColor =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        // Random size
+        const size =
+            6 + Math.random() * 6;
+
+        confetti.style.width =
+            `${size}px`;
+
+        confetti.style.height =
+            `${size * 1.5}px`;
+
+
+        // ==========================================
+        // LEFT SIDE
+        // ==========================================
+
+        if (i < 60) {
+
+            confetti.style.left = "0%";
+
+            confetti.style.top =
+                `${20 + Math.random() * 60}%`;
+
+            const distance =
+                300 + Math.random() * 500;
+
+            const vertical =
+                (Math.random() - 0.5) * 500;
+
+            confetti.style.setProperty(
+                "--x",
+                `${distance}px`
+            );
+
+            confetti.style.setProperty(
+                "--y",
+                `${vertical}px`
+            );
+
+        }
+
+
+        // ==========================================
+        // RIGHT SIDE
+        // ==========================================
+
+        else {
+
+            confetti.style.left = "100%";
+
+            confetti.style.top =
+                `${20 + Math.random() * 60}%`;
+
+            const distance =
+                300 + Math.random() * 500;
+
+            const vertical =
+                (Math.random() - 0.5) * 500;
+
+            confetti.style.setProperty(
+                "--x",
+                `-${distance}px`
+            );
+
+            confetti.style.setProperty(
+                "--y",
+                `${vertical}px`
+            );
+
+        }
+
+
+        // Add confetti
+        container.appendChild(confetti);
+
+
+        // Remove after animation
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 3000);
+
     }
 
 }
+
+
+// ==========================================
+// START CONFETTI
+// ==========================================
+
+window.addEventListener("load", () => {
+
+    console.log("🎉 Confetti system loaded");
+
+
+    // First burst after 1 second
+    setTimeout(() => {
+
+        createConfettiBurst();
+
+    }, 1000);
+
+
+    // ==========================================
+    // BURST EVERY 5 SECONDS
+    // ==========================================
+
+    setInterval(() => {
+
+        createConfettiBurst();
+
+    }, 5000);
+
+});
